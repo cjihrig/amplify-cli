@@ -621,13 +621,6 @@ export class FeatureFlags {
         defaultValueForNewProjects: 1,
       },
       {
-        // This flag is currently unused, but will be required as Lex is rolled out.
-        name: 'lex',
-        type: 'number',
-        defaultValueForExistingProjects: 0,
-        defaultValueForNewProjects: 1,
-      },
-      {
         name: 'translate',
         type: 'number',
         defaultValueForExistingProjects: 0,
