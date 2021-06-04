@@ -140,7 +140,7 @@ export const generateUpdateRequestTemplate = (modelName: string): string => {
 export const generateCreateRequestTemplate = (modelName: string): string => {
   const statements: Expression[] = [
     // set key the condition
-    comment('Begin - KeyCondition'),
+    comment('Begin - Key Condition'),
     ifElse(
       ref('ctx.stash.metadata.modelObjectKey'),
       compoundExpression([
@@ -152,7 +152,7 @@ export const generateCreateRequestTemplate = (modelName: string): string => {
       ]),
       compoundExpression([qref(methodCall(ref('ctx.stash.conditions.add'), obj({ id: obj({ attributeExists: bool(false) }) })))]),
     ),
-    comment('End - KeyCondition'),
+    comment('End - Key Condition'),
     // Generate conditions
     comment('Set the default values to put request'),
     set(ref('mergedValues'), methodCall(ref('util.defaultIfNull'), ref('ctx.stash.defaultValues'), obj({}))),
@@ -176,7 +176,7 @@ export const generateCreateRequestTemplate = (modelName: string): string => {
 
     iff(ref('context.args.condition'), qref(methodCall(ref('ctx.stash.conditions.add'), ref('context.args.condition')))),
     // key conditions
-    comment('Begin - KeyCondtion'),
+    comment('Begin - Key Condition'),
     ifElse(
       ref('ctx.stash.metadata.modelObjectKey'),
       compoundExpression([
@@ -188,7 +188,7 @@ export const generateCreateRequestTemplate = (modelName: string): string => {
       ]),
       compoundExpression([qref(methodCall(ref('ctx.stash.conditions.add'), obj({ id: obj({ attributeExists: bool(false) }) })))]),
     ),
-    comment('End - KeyCondition'),
+    comment('End - Key Condition'),
     // Generate conditions
     generateConditionSlot('ctx.stash.conditions', 'Conditions'),
     iff(ref('Conditions'), qref(methodCall(ref('PutObject.put'), str('condition'), ref('Conditions')))),
